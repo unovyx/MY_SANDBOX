@@ -9,7 +9,7 @@ const app = express();
 
 /* CORS */
 app.use(cors({
-    origin: process.env.FRONTEND_URL
+    origin: process.env.VERCEL_URL
 }));
 
 /* JSON */
