@@ -11,7 +11,8 @@ const app = express();
 
 const allowedOrigins = [
     "https://mysandbox-six.vercel.app",
-    "http://localhost:5500"
+    "http://localhost:5500",
+    "http://127.0.0.1:5500"
 ];
 
 app.use(cors({
