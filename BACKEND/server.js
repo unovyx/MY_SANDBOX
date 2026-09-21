@@ -1,4 +1,3 @@
-
 const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
@@ -8,27 +7,40 @@ require("dotenv").config();
 
 const app = express();
 
+/* CORS */
 app.use(cors());
+
+/* JSON */
 app.use(express.json());
 
-/* USER MODEL */
-
+/* USER SCHEMA */
 const userSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true, lowercase: true },
-    password: { type: String, required: true }
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
 });
 
 const User = mongoose.model("User", userSchema, "accounts");
 
-/* TEST */
-
+/* TEST ROUTE */
 app.get("/", (req, res) => {
-    res.json({ message: "Login API is running." });
+    res.json({
+        message: "Login API is running."
+    });
 });
 
 /* REGISTER */
-
 app.post("/api/register", async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -45,8 +57,10 @@ app.post("/api/register", async (req, res) => {
             });
         }
 
+        const cleanEmail = email.trim().toLowerCase();
+
         const existingUser = await User.findOne({
-            email: email.toLowerCase()
+            email: cleanEmail
         });
 
         if (existingUser) {
@@ -58,8 +72,8 @@ app.post("/api/register", async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         await User.create({
-            name: name,
-            email: email.toLowerCase(),
+            name: name.trim(),
+            email: cleanEmail,
             password: hashedPassword
         });
 
@@ -77,7 +91,6 @@ app.post("/api/register", async (req, res) => {
 });
 
 /* LOGIN */
-
 app.post("/api/login", async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -88,8 +101,10 @@ app.post("/api/login", async (req, res) => {
             });
         }
 
+        const cleanEmail = email.trim().toLowerCase();
+
         const user = await User.findOne({
-            email: email.toLowerCase()
+            email: cleanEmail
         });
 
         if (!user) {
@@ -140,7 +155,6 @@ app.post("/api/login", async (req, res) => {
 });
 
 /* PROFILE */
-
 app.get("/api/profile", async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
@@ -176,16 +190,14 @@ app.get("/api/profile", async (req, res) => {
 });
 
 /* SERVER */
+const PORT = process.env.PORT || 5001;
 
-const PORT = process.env.PORT || 5000;
-
-mongoose
-    .connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         console.log("MongoDB connected.");
 
-        app.listen(PORT, "127.0.0.1", () => {
-            console.log(`Server running at http://127.0.0.1:${PORT}`);
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
         });
     })
     .catch((error) => {
