@@ -1,281 +1,164 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const cors = require("cors");
-require("dotenv").config();
+/* API CONFIGURATION */
 
-const app = express();
+const API_URL = "https://my-sandbox-backend.onrender.com";
 
 
-/* CORS */
+/* SLIDESHOW */
 
-const allowedOrigins = [
-    "https://mysandbox-six.vercel.app",
-    "http://localhost:5500"
-];
+let currentSlide = 0;
+let slideTimer;
 
-app.use(cors({
-    origin: function(origin, callback) {
+function showSlide(index) {
+    const slides = document.querySelectorAll(".slide");
 
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-
-    },
-
-    methods: [
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE",
-        "OPTIONS"
-    ],
-
-    allowedHeaders: [
-        "Content-Type",
-        "Authorization"
-    ]
-}));
-
-
-/* JSON */
-
-app.use(express.json());
-
-
-/* USER SCHEMA */
-
-const userSchema = new mongoose.Schema({
-
-    name: {
-        type: String,
-        required: true
-    },
-
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true
-    },
-
-    password: {
-        type: String,
-        required: true
+    if (slides.length === 0) {
+        return;
     }
 
-});
+    if (index >= slides.length) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = slides.length - 1;
+    } else {
+        currentSlide = index;
+    }
 
-const User = mongoose.model(
-    "User",
-    userSchema,
-    "accounts"
-);
-
-
-/* TEST ROUTE */
-
-app.get("/", (req, res) => {
-
-    res.json({
-        message: "Login API is running."
+    slides.forEach(function(slide, i) {
+        slide.classList.toggle("active", i === currentSlide);
     });
+}
 
-});
+function nextSlide() {
+    showSlide(currentSlide + 1);
+    resetSlideTimer();
+}
 
+function previousSlide() {
+    showSlide(currentSlide - 1);
+    resetSlideTimer();
+}
 
-/* REGISTER */
+function startSlideTimer() {
+    slideTimer = setInterval(function() {
+        showSlide(currentSlide + 1);
+    }, 5000);
+}
 
-app.post("/api/register", async (req, res) => {
-
-    try {
-
-        const {
-            name,
-            email,
-            password
-        } = req.body;
-
-
-        if (!name || !email || !password) {
-
-            return res.status(400).json({
-                message: "All fields are required."
-            });
-
-        }
+function resetSlideTimer() {
+    clearInterval(slideTimer);
+    startSlideTimer();
+}
 
 
-        if (password.length < 6) {
+/* AUTHENTICATION */
 
-            return res.status(400).json({
-                message: "Password must be at least 6 characters."
-            });
+function showLogin() {
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
 
-        }
-
-
-        const cleanEmail =
-            email.trim().toLowerCase();
-
-
-        const existingUser =
-            await User.findOne({
-                email: cleanEmail
-            });
-
-
-        if (existingUser) {
-
-            return res.status(409).json({
-                message: "Email is already registered."
-            });
-
-        }
-
-
-        const hashedPassword =
-            await bcrypt.hash(password, 10);
-
-
-        await User.create({
-
-            name: name.trim(),
-
-            email: cleanEmail,
-
-            password: hashedPassword
-
-        });
-
-
-        res.status(201).json({
-
-            message: "Registration successful."
-
-        });
-
-
-    } catch (error) {
-
-        console.error(
-            "Registration error:",
-            error
-        );
-
-
-        res.status(500).json({
-
-            message: "Server error."
-
-        });
-
+    if (loginForm && registerForm) {
+        loginForm.classList.remove("hidden");
+        registerForm.classList.add("hidden");
     }
 
-});
+    clearMessage();
+}
+
+function showRegister() {
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    if (loginForm && registerForm) {
+        loginForm.classList.add("hidden");
+        registerForm.classList.remove("hidden");
+    }
+
+    clearMessage();
+}
 
 
 /* LOGIN */
 
-app.post("/api/login", async (req, res) => {
+async function login(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const remember = document.getElementById("remember").checked;
+    const message = document.getElementById("message");
+
+    clearMessage();
+
+    if (email === "" || password === "") {
+        message.textContent = "Please enter your email and password.";
+        return;
+    }
 
     try {
+        message.textContent = "Signing in...";
 
-        const {
-            email,
-            password
-        } = req.body;
+        const response = await fetch(`${API_URL}/api/login`, {
+            method: "POST",
 
-
-        if (!email || !password) {
-
-            return res.status(400).json({
-
-                message:
-                    "Email and password are required."
-
-            });
-
-        }
-
-
-        const cleanEmail =
-            email.trim().toLowerCase();
-
-
-        const user =
-            await User.findOne({
-                email: cleanEmail
-            });
-
-
-        if (!user) {
-
-            return res.status(401).json({
-
-                message:
-                    "Invalid email or password."
-
-            });
-
-        }
-
-
-        const validPassword =
-            await bcrypt.compare(
-                password,
-                user.password
-            );
-
-
-        if (!validPassword) {
-
-            return res.status(401).json({
-
-                message:
-                    "Invalid email or password."
-
-            });
-
-        }
-
-
-        const token = jwt.sign(
-
-            {
-                userId: user._id,
-                name: user.name,
-                email: user.email
+            headers: {
+                "Content-Type": "application/json"
             },
 
-            process.env.JWT_SECRET,
-
-            {
-                expiresIn: "1h"
-            }
-
-        );
-
-
-        res.json({
-
-            message: "Login successful.",
-
-            token: token,
-
-            user: {
-
-                name: user.name,
-
-                email: user.email
-
-            }
-
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
         });
 
+        const data = await response.json();
+
+        if (!response.ok) {
+            message.textContent = data.message || "Login failed.";
+            return;
+        }
+
+        /* SAVE TOKEN */
+
+        if (remember) {
+            localStorage.setItem(
+                "authToken",
+                data.token
+            );
+
+            sessionStorage.removeItem(
+                "authToken"
+            );
+
+        } else {
+            sessionStorage.setItem(
+                "authToken",
+                data.token
+            );
+
+            localStorage.removeItem(
+                "authToken"
+            );
+        }
+
+        /* SAVE USER INFORMATION */
+
+        localStorage.setItem(
+            "userName",
+            data.user.name
+        );
+
+        localStorage.setItem(
+            "userEmail",
+            data.user.email
+        );
+
+        message.textContent = "Login successful!";
+
+        /* GO TO MEMBERS PAGE */
+
+        setTimeout(function() {
+            window.location.href = "members.html";
+        }, 500);
 
     } catch (error) {
 
@@ -284,123 +167,233 @@ app.post("/api/login", async (req, res) => {
             error
         );
 
+        message.textContent =
+            "Cannot connect to the server.";
+    }
+}
 
-        res.status(500).json({
 
-            message: "Server error."
+/* REGISTER */
 
-        });
+async function register(event) {
+    event.preventDefault();
 
+    const name =
+        document.getElementById("fullName").value.trim();
+
+    const email =
+        document.getElementById("registerEmail").value.trim();
+
+    const password =
+        document.getElementById("registerPassword").value;
+
+    const confirm =
+        document.getElementById("confirmPassword").value;
+
+    const message =
+        document.getElementById("message");
+
+    clearMessage();
+
+    /* CHECK FIELDS */
+
+    if (
+        name === "" ||
+        email === "" ||
+        password === "" ||
+        confirm === ""
+    ) {
+        message.textContent =
+            "Please complete all fields.";
+
+        return;
     }
 
-});
+    /* CHECK PASSWORD LENGTH */
 
+    if (password.length < 8) {
+        message.textContent =
+            "Password must be at least 8 characters.";
 
-/* PROFILE */
+        return;
+    }
 
-app.get("/api/profile", async (req, res) => {
+    /* CHECK PASSWORD MATCH */
+
+    if (password !== confirm) {
+        message.textContent =
+            "Passwords do not match.";
+
+        return;
+    }
 
     try {
 
-        const authHeader =
-            req.headers.authorization;
+        message.textContent =
+            "Creating your account...";
 
+        const response = await fetch(
+            `${API_URL}/api/register`,
+            {
+                method: "POST",
 
-        if (
-            !authHeader ||
-            !authHeader.startsWith("Bearer ")
-        ) {
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-            return res.status(401).json({
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password
+                })
+            }
+        );
 
-                message: "Unauthorized."
+        const data = await response.json();
 
-            });
+        if (!response.ok) {
+            message.textContent =
+                data.message ||
+                "Registration failed.";
 
+            return;
         }
 
+        message.textContent =
+            "Account created successfully! You can now sign in.";
 
-        const token =
-            authHeader.split(" ")[1];
+        /* CLEAR REGISTER FORM */
 
+        document.getElementById(
+            "fullName"
+        ).value = "";
 
-        const decoded =
-            jwt.verify(
-                token,
-                process.env.JWT_SECRET
-            );
+        document.getElementById(
+            "registerEmail"
+        ).value = "";
 
+        document.getElementById(
+            "registerPassword"
+        ).value = "";
 
-        res.json({
+        document.getElementById(
+            "confirmPassword"
+        ).value = "";
 
-            message: "Protected data.",
+        /* SHOW LOGIN */
 
-            user: {
+        setTimeout(function() {
 
-                name: decoded.name,
+            showLogin();
 
-                email: decoded.email
+            document.getElementById(
+                "loginEmail"
+            ).value = email;
 
-            }
-
-        });
-
+        }, 1200);
 
     } catch (error) {
 
         console.error(
-            "Profile error:",
+            "Registration error:",
             error
         );
 
+        message.textContent =
+            "Cannot connect to the server.";
+    }
+}
 
-        res.status(401).json({
 
-            message:
-                "Invalid or expired token."
+/* PASSWORD */
 
-        });
+function togglePassword(inputId, button) {
 
+    const input =
+        document.getElementById(inputId);
+
+    if (!input) {
+        return;
     }
 
-});
+    if (input.type === "password") {
+
+        input.type = "text";
+
+        button.textContent = "Hide";
+
+        button.setAttribute(
+            "aria-label",
+            "Hide password"
+        );
+
+    } else {
+
+        input.type = "password";
+
+        button.textContent = "Show";
+
+        button.setAttribute(
+            "aria-label",
+            "Show password"
+        );
+    }
+}
 
 
-/* SERVER */
+/* FORGOT PASSWORD */
 
-const PORT =
-    process.env.PORT || 5001;
+function forgotPassword() {
+
+    const emailInput =
+        document.getElementById("loginEmail");
+
+    const message =
+        document.getElementById("message");
+
+    if (!emailInput || !message) {
+        return;
+    }
+
+    const email =
+        emailInput.value.trim();
+
+    if (email === "") {
+
+        message.textContent =
+            "Enter your email first to reset your password.";
+
+        return;
+    }
+
+    message.textContent =
+        "Password reset is not available yet.";
+}
 
 
-mongoose.connect(
-    process.env.MONGODB_URI
-)
+/* MESSAGE */
 
-.then(() => {
+function clearMessage() {
 
-    console.log(
-        "MongoDB connected."
-    );
+    const message =
+        document.getElementById("message");
+
+    if (message) {
+        message.textContent = "";
+    }
+}
 
 
-    app.listen(
-        PORT,
-        () => {
+/* START */
 
-            console.log(
-                `Server running on port ${PORT}`
-            );
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
-        }
-    );
+        showSlide(0);
 
-})
+        startSlideTimer();
 
-.catch((error) => {
+    }
+);
 
-    console.error(
-        "MongoDB connection failed:",
-        error
-    );
-
-});
