@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MY SANDBOX - A collector's shop for plants and hand-fired pots">
+    <title>MY SANDBOX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- FEATURED -->
+
+    <section class="featured-section">
+
+        <h1 class="visually-hidden">MY SANDBOX</h1>
+
+        <!-- SLIDE 1 -->
+
+        <div class="slide active">
+
+            <img src="assets/1762958850561_IMG_7708.jpg" alt="Plants and hand-fired pots">
+
+            <div class="image-overlay"></div>
+
+            <!-- BRAND LOGO -->
+
+            <div class="brand-logo">
+                <a href="#" aria-label="MY SANDBOX home">
+                    <img src="assets/image_2026-01-24_234948998.png" alt="MY SANDBOX">
+                </a>
+            </div>
+
+            <!-- SLIDE INFORMATION -->
+
+            <div class="slide-info">
+
+                <div class="small-title">
+                    <span class="line"></span>
+                    <span>Customization</span>
+                </div>
+
+                <h2>See the pairing first</h2>
+
+                <p>
+                    Pick a plant, pick a hand-fired pot, and preview
+                    them together before anything ships.
+                </p>
+
+                <div class="slide-number">
+
+                    <span>01 / 02</span>
+
+                    <div class="slide-bars">
+                        <span class="active-bar"></span>
+                        <span></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SLIDE 2 -->
+
+        <div class="slide">
+
+            <img src="assets/1763008272173_IMG_8043.jpg" alt="Collection of MY SANDBOX plants">
+
+            <div class="image-overlay"></div>
+
+            <!-- BRAND LOGO -->
+
+            <div class="brand-logo">
+                <a href="#" aria-label="MY SANDBOX home">
+                    <img src="assets/image_2026-01-24_234948998.png" alt="MY SANDBOX">
+                </a>
+            </div>
+
+            <!-- SLIDE INFORMATION -->
+
+            <div class="slide-info">
+
+                <div class="small-title">
+                    <span class="line"></span>
+                    <span>Discover</span>
+                </div>
+
+                <h2>Follow the collection</h2>
+
+                <p>
+                    Discover new plants, pots, care notes, and
+                    updates from the collection.
+                </p>
+
+                <div class="slide-number">
+
+                    <span>02 / 02</span>
+
+                    <div class="slide-bars">
+                        <span></span>
+                        <span class="active-bar"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SLIDESHOW NAVIGATION -->
+
+        <nav class="slide-controls" aria-label="Slideshow controls">
+
+            <button type="button" onclick="previousSlide()" aria-label="Previous slide">
+                ‹
+            </button>
+
+            <button type="button" onclick="nextSlide()" aria-label="Next slide">
+                ›
+            </button>
+
+        </nav>
+
+    </section>
+
+    <!-- ACCOUNT -->
+
+    <aside class="authentication-section" aria-label="Account Authentication">
+
+        <div class="auth-container">
+
+            <!-- AUTH BRAND -->
+
+            <header class="auth-brand">
+
+                <img src="assets/auth-image.png" alt="MY SANDBOX">
+
+            </header>
+
+            <!-- LOGIN -->
+        <section id="loginForm" class="auth-screen">
+            <header class="auth-header">
+                <p class="shop-label">MY SANDBOX · Collector's Shop</p>
+                <h2>Welcome To Our Shop!</h2>
+                <p>Sign in to continue.</p>
+            </header>
+
+            <form onsubmit="login(event)" novalidate>
+
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        name="email"
+                        placeholder="you@email.com"
+                        autocomplete="email"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+
+                    <div class="password-field">
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            name="password"
+                            placeholder="••••••••"
+                            autocomplete="current-password"
+                            required>
+
+                        <button
+                            type="button"
+                            onclick="togglePassword('loginPassword', this)"
+                            aria-label="Show password">
+                            Show
+                        </button>
+                    </div>
+                </div>
+
+                <div class="login-options">
+                    <label class="check-label">
+                        <input
+                            type="checkbox"
+                            id="remember"
+                            name="remember">
+
+                        <span>Keep me signed in</span>
+                    </label>
+
+                    <button
+                        type="button"
+                        class="forgot"
+                        onclick="forgotPassword()">
+                        Forgot password?
+                    </button>
+                </div>
+
+                <button class="main-button" type="submit">
+                    Sign in
+                </button>
+
+            </form>
+
+            <p class="bottom-text">
+                New here?
+                <button
+                    type="button"
+                    class="green-link"
+                    onclick="showRegister()">
+                    Create an account
+                </button>
+            </p>
+        </section>
+
+            <!-- REGISTER -->
+
+            <section id="registerForm" class="auth-screen hidden">
+
+                <header class="auth-header">
+
+                    <p class="shop-label">
+                        MY SANDBOX · Collector's Shop
+                    </p>
+
+                    <h2>Create Your Account</h2>
+
+                </header>
+
+                <form onsubmit="register(event)" novalidate>
+
+                    <div class="form-group">
+
+                        <label for="fullName">
+                            Full name
+                        </label>
+
+                        <input type="text" id="fullName" name="fullName" placeholder="Juan Dela Cruz" autocomplete="name" required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="registerEmail">
+                            Email
+                        </label>
+
+                        <input type="email" id="registerEmail" name="email" placeholder="you@email.com" autocomplete="email" required>
+
+                    </div>
+
+                    <div class="two-column">
+
+                        <div class="form-group">
+
+                            <label for="registerPassword">
+                                Password
+                            </label>
+
+                            <div class="password-field">
+
+                                <input type="password" id="registerPassword" name="password" placeholder="At least 8 characters" minlength="8" autocomplete="new-password" required>
+
+                                <button type="button" onclick="togglePassword('registerPassword', this)" aria-label="Show password">
+                                    Show
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="confirmPassword">
+                                Confirm password
+                            </label>
+
+                            <div class="password-field">
+
+                                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repeat password" minlength="8" autocomplete="new-password" required>
+
+                                <button type="button" onclick="togglePassword('confirmPassword', this)" aria-label="Show password">
+                                    Show
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <button class="main-button" type="submit">
+                        Create account
+                    </button>
+
+                </form>
+
+                <p class="bottom-text">
+
+                    Already have an account?
+
+                    <button type="button" class="green-link" onclick="showLogin()">
+                        Sign in
+                    </button>
+
+                </p>
+
+            </section>
+
+            <!-- STATUS MESSAGE -->
+
+            <output id="message" class="message" aria-live="polite"></output>
+
+            <!-- FOOTER -->
+
+            <footer class="sandbox-footer">
+
+                <div>
+                    Grow slowly <span>·</span> Live beautifully.
+                </div>
+
+                <div class="copyright">
+                    © 2026 MY SANDBOX. All rights reserved.
+                </div>
+
+            </footer>
+
+        </div>
+
+    </aside>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MY SANDBOX">
+    <title>MY SANDBOX</title>
+    <link rel="stylesheet" href="members.css">
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<section id="plantLoader" class="plant-loader" aria-label="Loading MY SANDBOX">
+    <div class="loading-interface">
+        <div class="loading-top">
+            <strong>MY SANDBOX+</strong>
+            <span>MEMBERS PAGE</span>
+        </div>
+
+        <div class="loading-character">
+            <span class="loading-character-label">SYSTEM READY?</span>
+            <img src="assets/image_2026-01-24_234948998.png" alt="Sandbox character">
+        </div>
+
+        <div class="loading-information">
+            <p id="loadingStatus">INITIALIZING SANDBOX...</p>
+
+            <div class="loading-title-row">
+                <h1>LOADING</h1>
+                <span id="loadingPercent">0%</span>
+            </div>
+
+            <div class="loading-progress">
+                <div id="loadingProgressBar"></div>
+            </div>
+
+            <div class="loading-meta">
+                <span>SYSTEM: ONLINE</span>
+                <span id="loadingMessage">PREPARING SOMETHING QUESTIONABLE...</span>
+            </div>
+        </div>
+
+        <footer class="loading-footer">
+            <span>PLEASE WAIT</span>
+            <span>FOUR PEOPLE ARE PROBABLY RESPONSIBLE FOR THIS.</span>
+        </footer>
+    </div>
+</section>
+
+<!-- HEADER -->
+<header class="site-header">
+    <a href="#home" class="site-logo" aria-label="MY SANDBOX home">
+        <img src="assets/auth-image.png" alt="MY SANDBOX">
+    </a>
+
+    <nav class="site-nav" aria-label="Main navigation">
+        <a href="#home" class="nav-link active">HOME</a>
+        <a href="#members" class="nav-link">MEMBERS</a>
+        <a href="#about" class="nav-link">ABOUT</a>
+    </nav>
+
+    <button id="logoutButton" class="exit-button" type="button">LOGOUT</button>
+</header>
+
+<!-- MAIN -->
+<main>
+
+<!-- HOME -->
+<section id="home" class="hero-section">
+    <div class="paper-grid" aria-hidden="true"></div>
+
+    <div class="hero-depth" aria-hidden="true">
+        <span class="depth-circle depth-one"></span>
+        <span class="depth-circle depth-two"></span>
+        <span class="depth-line depth-line-one"></span>
+        <span class="depth-line depth-line-two"></span>
+    </div>
+
+    <div class="hero-content">
+        <p class="hero-kicker">WELCOME TO MY SANDBOX+</p>
+
+        <h2>
+            YOU'RE NOT HERE
+            <span>FOR THE SYSTEM.</span>
+        </h2>
+
+        <p class="hero-description">
+            You're here to meet the four people who somehow
+            convinced themselves this was a good idea.
+        </p>
+
+        <p class="personality-instruction">
+            CHOOSE A CARD.
+            <strong>IT WON'T BITE. PROBABLY.</strong>
+        </p>
+
+        <button id="discoverButton" class="discover-button" type="button">
+            MEET THE MEMBERS ↓
+        </button>
+    </div>
+
+    <!-- HOME PERSONALITY CARDS -->
+    <div class="personality-cards">
+
+        <article class="personality-card personality-anxiety">
+            <div class="personality-number">01</div>
+            <img src="assets/anxiety.jpg" alt="Anxiety personality">
+            <div class="personality-card-info">
+                <strong>ANXIETY</strong>
+                <span>THE LOGIC</span>
+            </div>
+        </article>
+
+        <article class="personality-card personality-ennui">
+            <div class="personality-number">02</div>
+            <img src="assets/ennui.jpg" alt="Ennui personality">
+            <div class="personality-card-info">
+                <strong>ENNUI</strong>
+                <span>THE ORGANIZER</span>
+            </div>
+        </article>
+
+        <article class="personality-card personality-pressure">
+            <div class="personality-number">03</div>
+            <img src="assets/pressure.jpg" alt="Pressure Cooker personality">
+            <div class="personality-card-info">
+                <strong>PRESSURE COOKER</strong>
+                <span>THE UI FIXER</span>
+            </div>
+        </article>
+
+        <article class="personality-card personality-clown">
+            <div class="personality-number">04</div>
+            <img src="assets/clown.jpg" alt="Clown personality">
+            <div class="personality-card-info">
+                <strong>CLOWN</strong>
+                <span>THE DOCUMENTATION</span>
+            </div>
+        </article>
+
+    </div>
+
+    <div class="hero-bottom-note">SCROLL WHEN READY ↓</div>
+</section>
+
+<!-- MEMBERS -->
+<section id="members" class="members-section">
+    <div class="members-background-number" aria-hidden="true">MEMBERS</div>
+
+    <header class="members-heading">
+        <div>
+            <p class="section-label">SANDBOX / HUMAN DATABASE</p>
+
+            <h2>WHO'S INSIDE?</h2>
+
+            <p class="section-lead">
+                Four personalities were detected.
+                Unfortunately, they are attached to actual people.
+            </p>
+        </div>
+
+        <aside class="system-panel">
+            <div class="system-panel-top">
+                <span>SANDBOX STATUS</span>
+                <strong>ACTIVE</strong>
+            </div>
+
+            <div class="system-meter">
+                <span></span>
+            </div>
+
+            <div class="system-readout">
+                <span>PERSONS 04</span>
+                <span>ROLES 04</span>
+                <span>SYSTEM 01</span>
+            </div>
+
+            <p>
+                WARNING: PERSONALITY DATA MAY CONTAIN TRACES OF DEADLINES.
+            </p>
+        </aside>
+    </header>
+
+    <div class="sandbox-introduction">
+        <div>
+            <span>MEMBERS 441</span>
+            <h3>THE PERSONALITIES ARE EASY TO FIND.</h3>
+            <p>The people behind them are another story.</p>
+        </div>
+
+        <strong>PICK ONE. OPEN THE FILE.</strong>
+    </div>
+
+    <div class="personality-field">
+        <span>14.02 / 441</span>
+        <strong>PERSONALITY FIELD</strong>
+        <span>UNKNOWN / ACTIVE</span>
+    </div>
+
+    <!-- MEMBER LIST -->
+    <div class="members-list">
+
+        <!-- ANXIETY -->
+        <article class="member-card member-anxiety"
+                 tabindex="0"
+                 data-number="01"
+                 data-display="Janvanx Porol"
+                 data-name="UI SUPPORT & BACKEND DEVELOPER"
+                 data-role="ANXIETY"
+                 data-age="20"
+                 data-contribution="Backend and server-side logic, database management, and helping with frontend integration."
+                 data-statement="As a web developer, I still have a lot to learn, and I am willing to learn it all. Creating a website is challenging because you need to handle the logic for login, security, and how an e-commerce website works. However, it is enjoyable to create, and there is still so much more I want to learn."
+                 data-image="assets/porol.jpeg"
+                 data-email="janvanxporol72@gmail.com"
+                 data-status="BACKEND IS RUNNING. SOMEHOW.">
+
+            <div class="member-card-header">
+                <span>MEMBER 01</span>
+                <strong>ACTIVE</strong>
+            </div>
+
+            <div class="member-card-main">
+                <div class="personality-image">
+                    <span class="image-placeholder">PERSONALITY</span>
+                    <img src="assets/anxiety.jpg" alt="Anxiety personality">
+                    <div class="image-label">MEMBER HIDDEN</div>
+                </div>
+
+                <div class="member-card-info">
+                    <span class="detected-label">PERSONALITY DETECTED</span>
+
+                    <h3>ANXIETY</h3>
+
+                    <p>
+                        SOMEONE IS CHECKING
+                        THE DATABASE.
+                    </p>
+
+                    <div class="member-readout">
+                        <span>
+                            PERSONALITY
+                            <strong>ANXIETY</strong>
+                        </span>
+
+                        <span>
+                            SKILL
+                            <strong>100</strong>
+                        </span>
+
+                        <span>
+                            SLEEP
+                            <strong>0</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card-footer">
+                <p>
+                    CHECKING THE SAME THING 17 TIMES IN A ROW
+                </p>
+
+                <button class="reveal-button" type="button">
+                    REVEAL →
+                </button>
+            </div>
+        </article>
+
+        <!-- ENNUI -->
+        <article class="member-card member-ennui"
+                 tabindex="0"
+                 data-number="02"
+                 data-display="Rishame Sara"
+                 data-name="PROJECT MANAGER"
+                 data-role="ENNUI"
+                 data-age="20"
+                 data-contribution="Oversees planning, coordinates tasks, monitors progress, organizes meetings, maintains communication, addresses challenges, and helps keep the project aligned with its goals and deadlines."
+                 data-statement="As they say, ‘A successful project is built through teamwork, proper planning, and strong leadership.’ As the Project Manager, I made sure that our group worked together efficiently and remained focused throughout the development of the Sandbox system. I guided our team, supported each member, and helped turn our ideas into a complete and functional project."
+                 data-image="assets/sara.jpeg"
+                 data-email="Sararishame43@gmail.com"
+                 data-status="TEAM COORDINATION: 87%. PATIENCE: BUFFERING.">
+
+            <div class="member-card-header">
+                <span>MEMBER 02</span>
+                <strong>WATCHING</strong>
+            </div>
+
+            <div class="member-card-main">
+                <div class="personality-image">
+                    <span class="image-placeholder">PERSONALITY</span>
+                    <img src="assets/ennui.jpg" alt="Ennui personality">
+                    <div class="image-label">MEMBER HIDDEN</div>
+                </div>
+
+                <div class="member-card-info">
+                    <span class="detected-label">PERSONALITY DETECTED</span>
+
+                    <h3>ENNUI</h3>
+
+                    <p>
+                        SOMEONE HAS TO KNOW
+                        WHAT'S HAPPENING.
+                    </p>
+
+                    <div class="member-readout">
+                        <span>
+                            PERSONALITY
+                            <strong>ENNUI</strong>
+                        </span>
+
+                        <span>
+                            SKILL
+                            <strong>100</strong>
+                        </span>
+
+                        <span>
+                            MOTIVATION
+                            <strong>0</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card-footer">
+                <p>
+                    SOMEHOW BORED EVEN WHEN EVERYTHING IS PANICKING.
+                </p>
+
+                <button class="reveal-button" type="button">
+                    REVEAL →
+                </button>
+            </div>
+        </article>
+
+        <!-- PRESSURE COOKER -->
+        <article class="member-card member-pressure"
+                 tabindex="0"
+                 data-number="03"
+                 data-display="John Rian Desunlo"
+                 data-name="UI & FRONTEND SUPPORT"
+                 data-role="PRESSURE COOKER"
+                 data-age="20"
+                 data-contribution="Helps plan and support the website UI/UX and turns project features into a simple, user-friendly layout."
+                 data-statement="For me this project is more than creating a website. It is about turning an idea into something useful and meaningful. I learned even the small contributions can make a difference when everyone works together toward one goal. I'm proud to be part of this project because I was able to share my ideas and help create something that makes discovering and the experience more enjoyable for users. This project also taught me to be more responsible, creative, and open to my teammates’ ideas."
+                 data-image="assets/desunlo.jpeg"
+                 data-email="Desunlojohnrian@email.com"
+                 data-status="DEADLINE DETECTED. PRODUCTIVITY ACTIVATED.">
+
+            <div class="member-card-header">
+                <span>MEMBER 03</span>
+                <strong>HEATING UP</strong>
+            </div>
+
+            <div class="member-card-main">
+                <div class="personality-image">
+                    <span class="image-placeholder">PERSONALITY</span>
+                    <img src="assets/pressure.jpg" alt="Pressure Cooker personality">
+                    <div class="image-label">MEMBER HIDDEN</div>
+                </div>
+
+                <div class="member-card-info">
+                    <span class="detected-label">PERSONALITY DETECTED</span>
+
+                    <h3>PRESSURE COOKER</h3>
+
+                    <p>
+                        DEADLINE DETECTED.
+                        UI ACTIVATED.
+                    </p>
+
+                    <div class="member-readout">
+                        <span>
+                            PERSONALITY
+                            <strong>PRESSURE</strong>
+                        </span>
+
+                        <span>
+                            SKILL
+                            <strong>100</strong>
+                        </span>
+
+                        <span>
+                            STRESS
+                            <strong>100</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card-footer">
+                <p>
+                    SAYING "I GOT THIS" WITH #& TABS OPEN.
+                </p>
+
+                <button class="reveal-button" type="button">
+                    REVEAL →
+                </button>
+            </div>
+        </article>
+
+        <!-- CLOWN -->
+        <article class="member-card member-clown"
+                 tabindex="0"
+                 data-number="04"
+                 data-display="Mark Obal"
+                 data-name="DOCUMENTATION"
+                 data-role="CLOWN"
+                 data-age="20"
+                 data-contribution="Organizes and completes written requirements, reports, and documentation from development start through the finished system."
+                 data-statement="As they say, ‘Good documentation is the bridge between a good project and a great understanding.’ As the Documentation member, I made sure our group's hard work, ideas, and system processes are clearly documented and easy to understand for our panel and future users."
+                 data-image="assets/obal.jpeg"
+                 data-email="markobalmark@gmail.com"
+                 data-status="DOCUMENTATION COMPLETE. CHAOS INDEX: ACCEPTABLE.">
+
+            <div class="member-card-header">
+                <span>MEMBER 04</span>
+                <strong>UNSTABLE</strong>
+            </div>
+
+            <div class="member-card-main">
+                <div class="personality-image">
+                    <span class="image-placeholder">PERSONALITY</span>
+                    <img src="assets/clown.jpg" alt="Clown personality">
+                    <div class="image-label">MEMBER HIDDEN</div>
+                </div>
+
+                <div class="member-card-info">
+                    <span class="detected-label">PERSONALITY DETECTED</span>
+
+                    <h3>CLOWN</h3>
+
+                    <p>
+                        SOMEONE HAS TO
+                        WRITE THIS DOWN.
+                    </p>
+
+                    <div class="member-readout">
+                        <span>
+                            PERSONALITY
+                            <strong>CLOWN</strong>
+                        </span>
+
+                        <span>
+                            SKILL
+                            <strong>25</strong>
+                        </span>
+
+                        <span>
+                            LUCK
+                            <strong>100</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card-footer">
+                <p>
+                    HAVING NO IDEA WHAT IS HAPPENING BUT PARTICIPATING ANYWAY.
+                </p>
+
+                <button class="reveal-button" type="button">
+                    REVEAL →
+                </button>
+            </div>
+        </article>
+
+    </div>
+
+    <div class="members-bottom-note">
+        <span>SANDBOX NOTE</span>
+
+        <p>
+            The personality is only the beginning.
+            Open the file to find the actual member responsible.
+        </p>
+
+        <strong>GOODLUCK.</strong>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+    <div class="about-background-number" aria-hidden="true">441</div>
+
+    <header class="about-heading">
+        <p class="section-label">MEMBER 441 / TEAM SUMMARY</p>
+
+        <h2>
+            THE PEOPLE
+            <span>BEHIND...</span>
+        </h2>
+
+        <p>
+            SOMEWHERE BETWEEN "WE GOT THIS" AND "WHO DID THAT?".
+        </p>
+    </header>
+
+    <div class="about-console">
+
+        <div class="console-header">
+            <span>MEMBER 441 // TEAM SUMMARY</span>
+            <strong>CONNECTION ESTABLISHED</strong>
+        </div>
+
+        <div class="about-member-list">
+
+            <article class="about-member">
+                <div class="about-number">01</div>
+
+                <div>
+                    <span>ANXIETY</span>
+                    <h3>Janvanx Porol</h3>
+                    <strong>UI SUPPORT & BACKEND DEVELOPER</strong>
+
+                    <p>
+                        Handles server-side logic,
+                        database management,
+                        and frontend integration.
+                    </p>
+                </div>
+            </article>
+
+            <article class="about-member">
+                <div class="about-number">02</div>
+
+                <div>
+                    <span>ENNUI</span>
+                    <h3>Rishame Sara</h3>
+                    <strong>PROJECT MANAGER</strong>
+
+                    <p>
+                        Coordinates tasks, tracks progress,
+                        and keeps the team aligned.
+                    </p>
+                </div>
+            </article>
+
+            <article class="about-member">
+                <div class="about-number">03</div>
+
+                <div>
+                    <span>PRESSURE COOKER</span>
+                    <h3>John Rian Desunlo</h3>
+                    <strong>UI & FRONTEND SUPPORT</strong>
+
+                    <p>
+                        Helps turn project features
+                        into a simple and usable interface.
+                    </p>
+                </div>
+            </article>
+
+            <article class="about-member">
+                <div class="about-number">04</div>
+
+                <div>
+                    <span>CLOWN</span>
+                    <h3>Mark Obal</h3>
+                    <strong>DOCUMENTATION</strong>
+
+                    <p>
+                        Organizes requirements, reports,
+                        system processes, and project records.
+                    </p>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="about-final">
+            <span>FINAL SYSTEM REPORT</span>
+
+            <p>
+                4 different roles. 4 different personalities.
+                1 Group.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+</main>
+
+<!-- MEMBER REVEAL MODAL -->
+<aside id="memberModal"
+       class="member-modal"
+       aria-hidden="true"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="modalName">
+
+    <div class="modal-window">
+
+        <button id="modalClose"
+                class="modal-close"
+                type="button"
+                aria-label="Close member">×</button>
+
+        <div class="modal-image-area">
+            <div class="modal-image-grid" aria-hidden="true"></div>
+
+            <span class="modal-image-label">MEMBER DETECTED</span>
+            <span class="modal-image-placeholder">MEMBER IMAGE</span>
+
+            <img id="modalImage" src="" alt="Member">
+
+            <span id="modalNumber">RECORD 01</span>
+        </div>
+
+        <div class="modal-content">
+
+            <span class="modal-small-label">PERSONALITY REVEALED</span>
+
+            <h2 id="modalDisplay">ANXIETY</h2>
+
+            <p id="modalRole" class="modal-role">
+                UI SUPPORT & BACKEND DEVELOPER
+            </p>
+
+            <h3 id="modalName">MEMBER ONE</h3>
+
+            <div class="modal-details">
+
+                <div>
+                    <span>AGE</span>
+                    <strong id="modalAge">20</strong>
+                </div>
+
+                <div>
+                    <span>STATUS</span>
+                    <strong id="modalStatus">ONLINE</strong>
+                </div>
+
+                <div>
+                    <span>EMAIL</span>
+                    <strong id="modalEmail">—</strong>
+                </div>
+
+            </div>
+
+            <div class="modal-block">
+                <span>CONTRIBUTION</span>
+                <p id="modalContribution">Member contribution.</p>
+            </div>
+
+            <div class="modal-block">
+                <span>MEMBER STATEMENT</span>
+                <p id="modalStatement">“I was going to do it.”</p>
+            </div>
+
+            <div class="modal-status-box">
+                <span>CURRENT STATUS</span>
+                <strong id="modalStatusText">
+                    CURRENTLY CONTRIBUTING. PROBABLY.
+                </strong>
+            </div>
+
+        </div>
+    </div>
+</aside>
+
+<!-- EXIT MODAL -->
+<aside id="logoutModal"
+       class="logout-modal"
+       aria-hidden="true"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="logoutTitle">
+
+    <div class="logout-window">
+
+        <span class="logout-small">LEAVING THE PROJECT?</span>
+
+        <h2 id="logoutTitle">ARE YOU SURE?</h2>
+
+        <div class="logout-actions">
+            <button id="cancelLogout" type="button">STAY</button>
+            <button id="confirmLogout" type="button">EXIT</button>
+        </div>
+
+    </div>
+</aside>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div>
+        <strong>MEMBER 441</strong>
+        <span>MEET THE PEOPLE BEHIND IT.</span>
+    </div>
+
+    <div>
+        <strong>MADE BY PEOPLE</strong>
+        <span>WHO PROBABLY NEED SLEEP.</span>
+    </div>
+
+    <div>© 2026</div>
+</footer>
+
+<script src="members.js"></script>
+
+</body>
+</html>
