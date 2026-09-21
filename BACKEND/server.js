@@ -8,8 +8,28 @@ require("dotenv").config();
 const app = express();
 
 /* CORS */
+
+const allowedOrigins = [
+    "https://mysandbox-six.vercel.app",
+    "http://localhost:5500"
+];
+
 app.use(cors({
-    origin: process.env.VERCEL_URL
+    origin: function (origin, callback) {
+
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+
+    allowedHeaders: [
+        "Content-Type",
+        "Authorization"
+    ]
 }));
 
 /* JSON */
@@ -205,3 +225,4 @@ mongoose.connect(process.env.MONGODB_URI)
     .catch((error) => {
         console.error("MongoDB connection failed:", error);
     });
+
